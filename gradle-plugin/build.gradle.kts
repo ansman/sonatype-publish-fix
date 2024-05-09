@@ -84,11 +84,3 @@ pluginManager.withPlugin("org.gradle.signing") {
         useGpgCmd()
     }
 }
-
-tasks.publishPlugins {
-    doFirst {
-        check(!version.toString().endsWith("-SNAPSHOT")) {
-            "You cannot publish snapshot versions"
-        }
-    }
-}

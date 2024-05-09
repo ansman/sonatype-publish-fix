@@ -26,4 +26,4 @@ jobs:
     - name: Run Checks
       uses: gradle/gradle-build-action@v2
       with:
-        arguments: check publishPlugins --validate-only --continue --stacktrace
+        arguments: check --continue --stacktrace
