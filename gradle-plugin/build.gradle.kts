@@ -15,7 +15,6 @@ if (providers.gradleProperty("signArtifacts").orNull?.toBooleanStrict() == true)
 group = "se.ansman.sonatype-publish-fix"
 version = providers.gradleProperty("version").get()
 
-
 tasks.withType<Test> {
     useJUnitPlatform()
     maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
@@ -64,6 +63,22 @@ publishing {
 
 val functionalTest: SourceSet by sourceSets.creating
 
+val functionalTestTask = tasks.register<Test>("functionalTest") {
+    description = "Runs the integration tests."
+    group = "verification"
+    testClassesDirs = functionalTest.output.classesDirs
+    classpath = functionalTest.runtimeClasspath
+    dependsOn("publishAllPublicationsToBuildDirRepository")
+    mustRunAfter(tasks.test)
+    systemProperty("mavenRepo", buildDirMavenRepo.get().asFile.absolutePath)
+    systemProperty("pluginVersion", version.toString())
+    systemProperty("currentGradleVersion", gradle.gradleVersion)
+}
+
+tasks.check {
+    dependsOn(functionalTestTask)
+}
+
 @Suppress("UnstableApiUsage")
 gradlePlugin {
     isAutomatedPublishing = true
@@ -85,4 +100,11 @@ pluginManager.withPlugin("org.gradle.signing") {
     configure<SigningExtension> {
         useGpgCmd()
     }
+}
+
+dependencies {
+    "functionalTestImplementation"(platform(libs.junit.bom))
+    "functionalTestImplementation"(libs.junit.jupiter)
+    "functionalTestRuntimeOnly"(libs.junit.platform.launcher)
+    "functionalTestImplementation"(libs.assertk)
 }

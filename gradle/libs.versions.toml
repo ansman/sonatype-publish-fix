@@ -1,7 +1,15 @@
 [versions]
 kotlin = "2.0.10"
 gradlePublish = "1.2.1"
+junit5 = "5.10.2"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 gradle-publish = { id = "com.gradle.plugin-publish", version.ref = "gradlePublish" }
+
+[libraries]
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit5" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+
+assertk = "com.willowtreeapps.assertk:assertk:0.28.1"
