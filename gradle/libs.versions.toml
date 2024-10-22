@@ -1,7 +1,7 @@
 [versions]
 kotlin = "2.0.21"
 gradlePublish = "1.3.0"
-junit5 = "5.11.2"
+junit5 = "5.11.3"
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
