@@ -156,7 +156,8 @@ class FunctionalTest {
         private fun provideGradleVersions(): Stream<Arguments> =
             sequenceOf(
                 System.getProperty("currentGradleVersion"),
-                "8.10",
+                "8.11",
+                "8.10.2",
                 "8.9",
                 "8.8",
                 "8.7",
