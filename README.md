@@ -7,6 +7,10 @@ This plugin will limit the parallelism of the publication tasks to 1 when publis
 
 For the changelog see the [releases page](https://github.com/ansman/sonatype-publish-fix/releases).
 
+Archived
+---
+This project has been archived. You can no longer publish to sonatype with `maven-publish`. Instead you should use [vanniktech/gradle-maven-publish-plugin](https://github.com/vanniktech/gradle-maven-publish-plugin).
+
 Setup
 ---
 To set it up, all you need to do is to apply the plugin:
