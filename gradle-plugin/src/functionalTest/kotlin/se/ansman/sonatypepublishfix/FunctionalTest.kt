@@ -72,7 +72,7 @@ class FunctionalTest {
                     gradlePluginPortal()
                 }
             }
-            
+
             include(":module1")
             include(":module2")
         """.trimIndent())
@@ -92,10 +92,10 @@ class FunctionalTest {
                 `maven-publish`
                 id("se.ansman.sonatype-publish-fix") version "${System.getProperty("pluginVersion")}"
             }
-            
+
             abstract class DummyPublishTask : org.gradle.api.publish.maven.tasks.PublishToMavenRepository() {
-                private val concurrentTasks = project.rootProject.ext["concurrentTasks"] as AtomicInteger 
-            
+                private val concurrentTasks = project.rootProject.ext["concurrentTasks"] as AtomicInteger
+
                 @org.gradle.api.tasks.TaskAction
                 override fun publish() {
                     println("Task ${'$'}name started")
@@ -110,7 +110,7 @@ class FunctionalTest {
                 artifactId = "example"
                 version = "1.0.0"
             }
-            
+
             publishing {
                 repositories {
                     maven {
@@ -156,7 +156,8 @@ class FunctionalTest {
         private fun provideGradleVersions(): Stream<Arguments> =
             sequenceOf(
                 System.getProperty("currentGradleVersion"),
-                "8.14",
+                "9.0.0",
+                "8.14.3",
                 "8.13",
                 "8.12.1",
                 "8.11.1",
